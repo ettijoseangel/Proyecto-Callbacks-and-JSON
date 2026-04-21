@@ -33,6 +33,52 @@ async function tabla_libros() {
 
 }
 
+//Para capturar el botón de envío
+const btnAgregar = document.getElementById('btnAgregar');
+
+btnAgregar.addEventListener('click', () => {
+    //Creamos el objeto con los datos agregados
+    const nuevoLibro = {
+        titulo: document.getElementById('titulo').value,
+        autor: document.getElementById('autor').value,
+        genero: document.getElementById('genero').value,
+        disponible: true // Por defecto estará disponible
+    };
+
+    // Validamos que no envie campos vacios
+    if (nuevoLibro.titulo && nuevoLibro.autor) {
+        agregarLibro(nuevoLibro);
+
+        //Limpiamos los inputs para el siguiente libro
+        document.getElementById('titulo').value = '';
+        document.getElementById('autor').value = '';
+        document.getElementById('genero').value = '';
+    } else {
+        alert("Por favor, llena al menos el título y el autor.");
+    }
+});
+
+
+// Función para agregar libros a SheetDB
+async function agregarLibro(libro) {
+    try {
+        const respuesta = await fetch(API_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({data: [libro] }) // SheetDB requiere este formato { data: [...] }
+        });
+
+        if (respuesta.ok) {
+            alert("Nuevo libro agregado!!!");
+            tabla_libros(); //Recargamos la tabla para ver el cambio
+        }
+    } catch (error) {
+        console.log("Error al guardar el libro:", error);
+    }
+    
+}
 
 
 // Ejecutar al cargar la página
