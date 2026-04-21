@@ -61,6 +61,23 @@ function actualizarDisponibilidad(titulo, nuevoEstado, callback) {
 }
 
 // Ejemplo de cómo ejecutar la aplicación
-mostrarLibros();
-agregarLibro("El principito", "Antoine de Saint-Exupéry", "Fábula", true);
-actualizarDisponibilidad("1984", false);
+// mostrarLibros();
+// agregarLibro("El principito", "Antoine de Saint-Exupéry", "Fábula", true);
+// actualizarDisponibilidad("1984", false);
+
+
+
+// ***** Ejemplo de ejecución ******
+
+// 1. Agregamos un libro
+agregarLibro("El principito", "Antoine de Saint-Exupéry", "Fábula", true, (mensaje) => {
+    console.log(mensaje);
+
+    // 2. CUANDO se termine de agregar, actualizamos otro
+    actualizarDisponibilidad("1984", false, (msjActualizacion) => {
+        console.log(msjActualizacion);
+
+        // 3. FINALMENTE, mostramos el inventario completo para ver los cambios
+        mostrarLibros();
+    });
+});
