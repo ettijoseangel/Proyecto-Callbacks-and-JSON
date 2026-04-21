@@ -47,10 +47,16 @@ function agregarLibro(titulo, autor, genero, disponible, callback) {
 }
 
 // Función para cambiar la disponibilidad de un libro
-function actualizarDisponibilidad(titulo, nuevoEstado) {
+function actualizarDisponibilidad(titulo, nuevoEstado, callback) {
   // Simula un retraso antes de actualizar la disponibilidad
   setTimeout(() => {
-    // Pista: busca el libro por título y cambia la propiedad 'disponible' a nuevoEstado
+    const libro = biblioteca.libros.find((libro) => libro.titulo === titulo);
+    if (libro) {
+        libro.disponible = nuevoEstado;
+        callback(`Estado de "${titulo}" actualizado.`);
+    } else{
+        callback(`Error: El libro "${titulo}" no se encontró.`);
+    }
   }, 1000);
 }
 
