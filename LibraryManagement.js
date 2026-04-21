@@ -52,10 +52,10 @@ function actualizarDisponibilidad(titulo, nuevoEstado, callback) {
   setTimeout(() => {
     const libro = biblioteca.libros.find((libro) => libro.titulo === titulo);
     if (libro) {
-        libro.disponible = nuevoEstado;
-        callback(`Estado de "${titulo}" actualizado.`);
-    } else{
-        callback(`Error: El libro "${titulo}" no se encontró.`);
+      libro.disponible = nuevoEstado;
+      callback(`Estado de "${titulo}" actualizado.`);
+    } else {
+      callback(`Error: El libro "${titulo}" no se encontró.`);
     }
   }, 1000);
 }
@@ -65,19 +65,47 @@ function actualizarDisponibilidad(titulo, nuevoEstado, callback) {
 // agregarLibro("El principito", "Antoine de Saint-Exupéry", "Fábula", true);
 // actualizarDisponibilidad("1984", false);
 
-
-
 // ***** Ejemplo de ejecución ******
 
 // 1. Agregamos un libro
-agregarLibro("El principito", "Antoine de Saint-Exupéry", "Fábula", true, (mensaje) => {
+agregarLibro(
+  "El principito",
+  "Antoine de Saint-Exupéry",
+  "Fábula",
+  true,
+  (mensaje) => {
     console.log(mensaje);
 
     // 2. CUANDO se termine de agregar, actualizamos otro
     actualizarDisponibilidad("1984", false, (msjActualizacion) => {
-        console.log(msjActualizacion);
+      console.log(msjActualizacion);
 
-        // 3. FINALMENTE, mostramos el inventario completo para ver los cambios
-        mostrarLibros();
+      // 3. FINALMENTE, mostramos el inventario completo para ver los cambios
+      mostrarLibros();
     });
+  },
+);
+
+//** Función extra: Buscar por título **/
+
+function buscarPorTitulo(titulo, callback) {
+  leerDatos((datos) => {
+    const libroEncontrado = datos.libros.find(
+      (libro) => libro.titulo === titulo,
+    );
+    if (libroEncontrado) {
+      callback(null, libroEncontrado);
+    } else {
+      callback("Libro no encontrado", null);
+    }
+  });
+}
+
+// Ejemplo de uso:
+buscarPorTitulo("1984", (error, libro) => {
+    if (error) {
+        console.error(error);
+    } else {
+        console.log("Libro encontrado con éxito:", libro);
+    }
 });
