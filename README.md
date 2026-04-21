@@ -22,4 +22,4 @@ Imagina que eres parte del equipo de desarrollo de una pequeña biblioteca local
 2. Simular una función para leer datos: Usarás un callback para simular la lectura de un archivo JSON. Esta función tomará el objeto JSON y lo devolverá con un pequeño retraso (simulando una operación de lectura asincrónica).
 3. Crear funciones para interactuar con el inventario: Necesitarás funciones que permitan agregar libros, actualizar su disponibilidad y consultar el inventario.
 4. (Opcional) Simular escritura en JSON: Similar a la lectura, simula la escritura de datos en un archivo JSON usando un callback. Esto se hará cuando se agregue un nuevo libro o se actualice la disponibilidad de un libro.
-Puedes consultar un extracto de código para comenzar con la solución, se incluye un ejmplo de lo que se espera en la siguiente url: https://gist.github.com/heladio-devf-mx/b7f9cd1ffe11e2fd9a46cba6ef019ea1
+Puedes consultar un extracto de código para comenzar con la solución, se incluye un ejemplo de lo que se espera en la siguiente url: https://gist.github.com/heladio-devf-mx/b7f9cd1ffe11e2fd9a46cba6ef019ea1
