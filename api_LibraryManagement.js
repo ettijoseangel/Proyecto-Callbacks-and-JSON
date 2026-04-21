@@ -27,6 +27,7 @@ async function tabla_libros() {
         <td>${libro.autor}</td>
         <td>${libro.genero}</td>
         <td>${String(libro.disponible).toUpperCase() === 'TRUE' ? '✅' : '❌' }</td>
+        <td><button onclick="eliminarLibro('${libro.titulo}')">🗑️</button></td>
         `;
         tabla.appendChild(fila);
     });
@@ -78,6 +79,22 @@ async function agregarLibro(libro) {
         console.log("Error al guardar el libro:", error);
     }
     
+}
+
+// Funcion extra: Borrar libro
+async function eliminarLibro(titulo) {
+    try {
+        const respuesta = await fetch (`${API_URL}/titulo/${titulo}`, {
+            method: 'DELETE',
+        });
+
+        if (respuesta.ok) {
+            alert(`"${titulo}" ha sido removido de la estantería.`);
+            tabla_libros(); //Recargamos la tabla
+        }
+    } catch (error) {
+        console.error("Error al eliminar:", error);
+    }
 }
 
 
